@@ -1,0 +1,10 @@
+# srec_cat command file to dump the CRC for a code area
+# Usage: srec_cat @filename
+QE-Power-T.elf.srec          			# input file
+-fill 0xFF 0x08003800 0x8037000        		# fill code area with 0xff
+-crop 0x08003800 0x8036ffe              	# just keep code area for CRC calculation below (CRC will be at 0x8036ffe..0x8036fff)
+-CRC16_Little_Endian 0x8036ffe -POLYnomial ansi	# calculate little endian poly=0x8005 CRC16 at given address.
+-crop 0x8036ffe 0x8037000             		# keep the CRC itself
+-Output                            		# produce output
+-                                  		# '-' is special 'file': use console output
+-hex-dump                          		# dump in hex format

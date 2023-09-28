@@ -1,0 +1,18 @@
+# srec_cat command file to add the CRC and produce application file to be flashed
+# Usage: srec_cat @filename
+
+
+#first: create CRC checksum
+NRG-RHT.srec          			# input file
+-fill 0xFF 0x08006000 0x8020000        		# fill code area with 0xff
+-crop 0x08006000 0x800fffe              	# just keep code area for CRC calculation below (CRC will be at 0x800fffe..0x80ffff)
+-CRC16_Little_Endian 0x800fffe 0x1021		# calculate little endian poly=0x1021 CRC16 at given address.
+-crop 0x800fffe 0x8020000             		# keep the CRC itself
+
+#second: add application file
+NRG-RHT.srec           			# input file
+-fill 0xFF 0x08006000 0x800fffe        		# fill code area with 0xff
+
+#finally, produce the output file
+-Output                            		# produce output
+NRG-RHT_CRC_added.srec
