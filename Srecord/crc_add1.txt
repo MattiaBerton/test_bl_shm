@@ -3,16 +3,16 @@
 
 
 #first: create CRC checksum
-NRG-RHT.srec          			# input file
+EmbeddedProject1.srec          			# input file
 -fill 0xF1 0x8006000 0x800f000        	# fill code area with 0xf1
 -crop 0x8006000 0x800effe              	# just keep code area for CRC calculation below (CRC will be at 0x800effe..0x80efff)
 -CRC16_Little_Endian 0x800effe 0x1021	# calculate little endian poly=0x1021 CRC16 at given address.
 -crop 0x800effe 0x800f000             	# keep the CRC itself
 
 #second: add application file
-NRG-RHT.srec           			# input file
+EmbeddedProject1.srec           			# input file
 -fill 0xF1 0x8006000 0x800effe        		# fill code area with 0xf1
 
 #finally, produce the output file
 -Output                            		# produce output
-NRG-RHT_CRC_added.srec
+EmbeddedProject1_CRC_added.srec

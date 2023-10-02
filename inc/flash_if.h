@@ -76,7 +76,7 @@ enum {
 #define APPLICATION_ADDRESS     (uint32_t)0x08006000      /* Start user code address: ADDR_FLASH_PAGE_8 */
 
 /* Notable Flash addresses */
-#define USER_FLASH_END_ADDRESS        0x08010000		//todo: modificare
+#define USER_FLASH_END_ADDRESS        0x0800f000		//todo: modificare
 
 /* Define the user application size */
 #define USER_FLASH_SIZE               (USER_FLASH_END_ADDRESS - APPLICATION_ADDRESS + 1) /* Small default template application */

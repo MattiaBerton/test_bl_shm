@@ -44,9 +44,9 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-/*  128k flash 1 * 1024 * 1024 */
+/*  64k flash 1 * 1024 * 1024 */
 #define FLASH_START_ADRESS    0x08000000
-#define FLASH_PAGE_NBPERBANK  64
+#define FLASH_PAGE_NBPERBANK  32    //todo: modificare per G070
 #define FLASH_BANK_NUMBER     1
 
 /* Private macro -------------------------------------------------------------*/
@@ -91,7 +91,7 @@ uint32_t FLASH_If_Erase(uint32_t start)
   NbrOfPages = (FLASH_START_ADRESS + FLASH_SIZE);
   NbrOfPages = (NbrOfPages - start) / FLASH_PAGE_SIZE;
 
-  if(NbrOfPages > FLASH_PAGE_NBPERBANK)
+  if(NbrOfPages < FLASH_PAGE_NBPERBANK)
   {
     pEraseInit.Banks = FLASH_BANK_1;
     pEraseInit.NbPages = NbrOfPages % FLASH_PAGE_NBPERBANK;
